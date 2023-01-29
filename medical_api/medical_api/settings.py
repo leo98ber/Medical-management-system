@@ -85,7 +85,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'users.apps.UsersConfig',
-    # 'medical_center.apps.MedicalCenterConfig'
+    'doctors.apps.DoctorConfig'
 ]
 INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
 
