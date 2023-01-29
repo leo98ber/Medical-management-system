@@ -31,7 +31,7 @@ class User(BaseModel, AbstractUser):
 
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
-    USERNAME_FIELD = 'email'  # Esta variable me setea al correo como parametro de logeo
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name',
                        'last_name']
 
