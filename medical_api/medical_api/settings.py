@@ -18,7 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -34,27 +33,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-# Application definition
-DJANGO_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-]
-
-# AUTH_USER_MODEL = 'users.User'
-
-THIRD_PARTY_APPS = [
-    'rest_framework',
-    # 'django_filters'
-]
-LOCAL_APPS = [
-    # 'users.apps.UsersAppConfig',
-    'medical_center.apps.MedicalCenterConfig'
-]
-INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
 
 # Users & Authentication
 
@@ -87,6 +65,29 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'medical_api.wsgi.application'
+
+
+AUTH_USER_MODEL = 'users.User'
+
+# Application definition
+DJANGO_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    # 'django_filters'
+]
+LOCAL_APPS = [
+    'users.apps.UsersConfig',
+    # 'medical_center.apps.MedicalCenterConfig'
+]
+INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
