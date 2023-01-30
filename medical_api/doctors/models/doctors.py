@@ -9,14 +9,10 @@ from utils.models import BaseModel
 
 
 class Doctor(BaseModel):
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50)
 
-    picture = models.ImageField(
-        'profile picture',
-        upload_to='doctors/pictures/',
-        blank=True,
-        null=True
-    )
+    last_name = models.CharField(max_length=50)
+
     biography = models.TextField(max_length=500, blank=True)
 
     availability = models.DurationField(timedelta(hours=0))
@@ -27,4 +23,4 @@ class Doctor(BaseModel):
 
     def __str__(self):
         """Return user's str representation."""
-        return str(self.user.first_name)
+        return str(self.last_name)

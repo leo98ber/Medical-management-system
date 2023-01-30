@@ -11,8 +11,8 @@ from doctors.models import Doctor, Major, Center
 class DoctorAdmin(admin.ModelAdmin):
     """Doctor model admin."""
 
-    list_display = ('user', 'biography', 'major',)
-    search_fields = ('user__username', 'user__email', 'user__first_name', 'user__last_name',)
+    list_display = ('first_name', 'last_name', 'biography', 'major',)
+    search_fields = ('last_name', 'major')
     list_filter = ('major', 'center')
 
 
