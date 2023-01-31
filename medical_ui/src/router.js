@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from 'vue-router'
-import HelloWorld from "@/components/HelloWorld.vue";
+// import App from './App.vue'
 import ListDoctors from "@/components/Doctors/ListDoctors.vue";
 
 Vue.use(VueRouter)
@@ -11,11 +11,11 @@ const routes = [
     name: "ListDoctors",
     component: ListDoctors
   },
-   {
-    path: "/",
-    name: "HelloWorld",
-    component: HelloWorld
-  },
+  //  {
+  //   path: "/",
+  //   name: "App",
+  //   component: App
+  // },
 
 
 ];
