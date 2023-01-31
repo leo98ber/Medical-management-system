@@ -1,36 +1,23 @@
 <template>
+  <v-container class="px-10 px-md-10 mt-3" fluid>
+        <div class="tables-basic mt-3">
+<!--    <v-row>-->
 
-  <div>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      item-key="name"
-      class="elevation-1"
-      :search="search"
-      :custom-filter="filterOnlyCapsText"
-    >
-      <template >
-        <v-text-field
-          v-model="search"
-          label="Search (UPPER CASE ONLY)"
-          class="mx-4"
-        ></v-text-field>
-      </template>
-      <template >
-        <tr>
-          <td></td>
-          <td>
-            <v-text-field
-              v-model="calories"
-              type="number"
-              label="Less than"
-            ></v-text-field>
-          </td>
-          <td colspan="4"></td>
-        </tr>
-      </template>
-    </v-data-table>
-  </div>
+      <h2 align="center">Doctors available</h2>
+      <v-col cols="12">
+
+            <v-card class="mx-auto mt-5" max-width="10000">
+              <v-data-table
+                :headers="headers"
+                :items="doctors"
+                fixed-header
+                :items-per-page="10">
+              </v-data-table>
+            </v-card>
+      </v-col>
+<!--    </v-row>-->
+          </div>
+  </v-container>
 </template>
 
 
@@ -39,158 +26,47 @@
   export default {
     name: 'ListDoctors',
 
-    data () {
-      return {
-        search: '',
-        calories: '10000000',
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-                      {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-                      {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-                      {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: 1,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: 7,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: 8,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: 16,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: 0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: 2,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: 45,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: 22,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: 6,
-          },
-        ],
-      }
-    },
-    computed: {
-      headers () {
-        return [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          {
-            text: 'Calories',
-            value: 'calories',
-            filter: value => {
-              if (!this.calories) return true
-
-              return value < parseInt(this.calories)
-            },
-          },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
-        ]
-      },
-    },
     methods: {
       getDoctors(){
-        const path = '0.0.0.0:8000/doctors/'
-        axios.get(path).then((response) => {
+        console.log("AXIOS")
+        let url = 'http://0.0.0.0:8000/doctors/'
+        axios.get(url).then((response) => {
+          console.log("backend connection")
+          console.log(response.data)
           this.doctors = response.data
-        }).catch((error)=>"")
-      },
+        }).catch((error)=>{
+          console.log("ERROR")
+          console.log(error)
+        })
+      }},
 
-      filterOnlyCapsText (value, search) {
-        return value != null &&
-          search != null &&
-          typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(search) !== -1
+      created(){
+        this.getDoctors()
       },
+    data () {
+      return {
+        doctors: [],
+        headers: [
+
+        { text: 'Name', value: 'first_name'},
+        { text: 'Last Name', value: 'last_name' },
+        {text: 'Major', value: 'major'},
+        { text: 'Center', value: 'center' },
+        { text: 'Availability', value: 'availability' },
+      ]
+      }
     },
-  }
+
+
+      // filterOnlyCapsText (value, search) {
+      //   return value != null &&
+      //     search != null &&
+      //     typeof value === 'string' &&
+      //     value.toString().toLocaleUpperCase().indexOf(search) !== -1
+      // },
+    }
 </script>
 
+<style>
+
+</style>
