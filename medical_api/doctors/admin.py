@@ -13,7 +13,7 @@ class DoctorAdmin(admin.ModelAdmin):
 
     list_display = ('first_name', 'last_name', 'biography', 'major',)
     search_fields = ('last_name', 'major')
-    list_filter = ('major', 'center')
+    list_filter = ('major', 'last_name')
 
 
 @admin.register(Major)
