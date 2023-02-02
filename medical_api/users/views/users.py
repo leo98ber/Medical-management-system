@@ -1,5 +1,5 @@
 """Users views."""
-
+from django.http import HttpResponseForbidden
 # Django REST Framework
 from rest_framework import mixins, status
 from rest_framework.decorators import action
@@ -14,6 +14,7 @@ from users.serializers import UserModelSerializer, LoginSerializer, UserSignUpSe
 class UserViewSet(mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
                   mixins.ListModelMixin,
+                  mixins.DestroyModelMixin,
                   GenericViewSet
                   ):
     """User view set."""
@@ -25,10 +26,12 @@ class UserViewSet(mixins.RetrieveModelMixin,
     def login(self, request):
         """User sign in."""
         serializer = LoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = User.objects.get(**serializer.data)
-        user_data = UserModelSerializer(user).data
-        return Response(user_data, status=status.HTTP_200_OK)
+        if serializer.is_valid():
+            user = User.objects.get(**serializer.data)
+            user_data = UserModelSerializer(user).data
+            return Response(user_data, status=status.HTTP_200_OK)
+        else:
+            return HttpResponseForbidden("Invalid user parameters")
 
     @action(detail=False, methods=['post'])
     def signup(self, request):
