@@ -15,14 +15,14 @@
                 <div class="form-group row">
                   <label for="email" class="col-lg-3 col-form-label">Email</label>
                   <div class="pt-1 pb-3 col-sm-6">
-                    <input type="text" placeholder="Introduce email" name="email" class="form-control" v-model.trim="form.email">
+                    <input type="email" placeholder="Introduce email" name="email" class="form-control" v-model.trim="form.email" minlength="4" maxlength="50">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="title" class="col-lg-3 col-form-label">Password</label>
                   <div class="pt-10 pb-3 col-lg-6">
-                    <input type="text" placeholder="Introduce password" name="password" class="form-control" v-model.trim="form.password">
+                    <input type="password" placeholder="Introduce password" name="password" class="form-control" v-model.trim="form.password">
                   </div>
                 </div>
               <button class="btn btn-primary btn-block mt-5" type="submit">Register</button>

@@ -15,7 +15,7 @@
                 <div class="form-group row">
                   <label for="username" class="col-lg-3 col-form-label">Username</label>
                   <div class="pt-10 pb-3 col-sm-6">
-                    <input type="text" placeholder="Introduce username" name="username" class="form-control" v-model.trim="form.username">
+                    <input type="text" placeholder="Introduce username" name="username" class="form-control" v-model.trim="form.username" minlength="8" maxlength="20" required>
                   </div>
                 </div>
 
@@ -23,14 +23,14 @@
                 <div class="form-group row">
                   <label for="first_name" class="col-lg-3 col-form-label">First Name</label>
                   <div class="pt-10 pb-3 col-sm-6">
-                    <input type="text" placeholder="Introduce first name" name="first_name" class="form-control" v-model.trim="form.first_name">
+                    <input type="text" placeholder="Introduce first name" name="first_name" class="form-control" v-model.trim="form.first_name" minlength="2" maxlength="20">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="title" class="col-lg-3 col-form-label">Last Name</label>
                   <div class="pt-10 pb-3 col-sm-6">
-                    <input type="text" placeholder="Introduce last name" name="last_name" class="form-control" v-model.trim="form.last_name">
+                    <input type="text" placeholder="Introduce last name" name="last_name" class="form-control" v-model.trim="form.last_name" minlength="2" maxlength="20">
                   </div>
                 </div>
 
@@ -38,21 +38,21 @@
                 <div class="form-group row">
                   <label for="title" class="col-lg-3 col-form-label">Email</label>
                   <div class="pt-10 pb-3 col-sm-6">
-                    <input type="text" placeholder="Introduce last name" name="email" class="form-control" v-model.trim="form.email">
+                    <input type="email" placeholder="Introduce last name" name="email" class="form-control" v-model.trim="form.email" minlength="4" maxlength="50">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="phone_number" class="col-lg-3 col-form-label">Phone Number</label>
                   <div class="pt-10 pb-3 col-lg-6">
-                    <input type="text" placeholder="Introduce phone number" name="phone_number" class="form-control" v-model.trim="form.phone_number">
+                    <input type="text" placeholder="Introduce phone number" name="phone_number" class="form-control" v-model.trim="form.phone_number" minlength="8" maxlength="20">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="password" class="col-lg-3 col-form-label">Password</label>
                   <div class="pt-10 pb-3 col-lg-6">
-                    <input type="text" placeholder="Introduce password" name="password" class="form-control" v-model.trim="form.password">
+                    <input type="password" placeholder="Introduce password" name="password" class="form-control" v-model.trim="form.password" minlength="8" maxlength="20">
                   </div>
                 </div>
 
@@ -60,7 +60,7 @@
                 <div class="form-group row">
                   <label for="password_confirmation" class="col-lg-3 col-form-label">Confirmation</label>
                   <div class="pt-10 pb-3 col-lg-6">
-                    <input type="text" placeholder="Introduce confirm your password" name="password_confirmation" class="form-control" v-model.trim="form.password_confirmation">
+                    <input type="password" placeholder="Introduce confirm your password" name="password_confirmation" class="form-control" v-model.trim="form.password_confirmation">
                   </div>
                 </div>
 
