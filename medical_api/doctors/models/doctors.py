@@ -17,9 +17,9 @@ class Doctor(BaseModel):
 
     availability = models.DurationField(timedelta(hours=0))
 
-    major = models.ForeignKey('doctors.Major', on_delete=models.CASCADE)
+    major = models.OneToOneField('doctors.Major', on_delete=models.CASCADE)
 
-    center = models.ForeignKey('doctors.Center', on_delete=models.CASCADE)
+    centers = models.ManyToManyField('doctors.Center')
 
     def __str__(self):
         """Return user's str representation."""
