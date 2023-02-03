@@ -83,7 +83,7 @@
       return {
         perPage: 10,
         currentPage: 1,
-        fields: ['first_name', 'last_name', 'major', 'center', 'availability'],
+        fields: ['first_name', 'last_name', 'major', 'availability'],
         items: [
       ]
       }
