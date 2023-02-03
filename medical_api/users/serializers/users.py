@@ -7,6 +7,7 @@ from django.core.validators import RegexValidator
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth import authenticate
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import User
 
@@ -92,3 +93,7 @@ class UserSignUpSerializer(serializers.Serializer):
         User.objects.create_user(**data)
         data.pop('password')
         return data
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    pass
