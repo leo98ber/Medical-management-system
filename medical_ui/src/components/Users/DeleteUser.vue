@@ -31,22 +31,40 @@ export default {
     getUser()
     {
       let user = JSON.parse(localStorage.getItem('user'))
-      let  username = user['username']
+      let token = ''
+      let  username = ''
+      if(user){
+        token = user['token']
+        username = user['username']
+      }
       const path = `http://0.0.0.0:8000/users/${username}/`
-      axios.get(path).then((response) => {
+      axios.get(path,{headers: {'Authorization': 'Bearer '+token}}).then((response) => {
         this.element.username = response.data.username
-      }).catch((error) => {
+      }).catch(async (error) => {
         console.log(error)
+        await swal({
+          icon: 'error',
+          title: 'Error',
+          text: "Something was wrong",
+        })
+        location.href = '/login'
+
       })
     },
 
   deleteUser(){
         let user = JSON.parse(localStorage.getItem('user'))
-        let  username = user['username']
+        let token = ''
+        let  username = ''
+        if(user){
+          token = user['token']
+          username = user['username']
+        }
         const path = `http://0.0.0.0:8000/users/${username}/`
-              axios.delete(path).then((response) => {
-              location.href = '/login'
-      }).catch((error) => {
+              axios.delete(path, {headers: {'Authorization': 'Bearer '+token}}).then(async (response) => {
+                await swal("User was deleted successfully", "", "success")
+                location.href = '/login'
+              }).catch((error) => {
           console.log(error)
           swal({
                 icon: 'error',
