@@ -6,11 +6,10 @@ from doctors.models import Doctor
 
 class ReadDoctorSerializer(serializers.ModelSerializer):
     major = StringRelatedField()
-    center = StringRelatedField()
 
     class Meta:
         model = Doctor
-        exclude = ['modified', 'created']
+        exclude = ['modified', 'created', 'centers']
 
 
 class GeneralSerializer(serializers.ModelSerializer):
