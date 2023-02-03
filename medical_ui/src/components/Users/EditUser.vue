@@ -114,17 +114,27 @@
     methods: {
       onSubmit(evt){
         evt.preventDefault()
+
+
       let user = JSON.parse(localStorage.getItem('user'))
-      let  username = user['username']
+      let token = ''
+      let  username = ''
+      if(user){
+        token = user['token']
+        username = user['username']
+      }
+
 
       const path = `http://0.0.0.0:8000/users/${username}/`
-        axios.put(path, this.form).then((response) =>{
+        axios.put(path, this.form, {headers: {'Authorization': 'Bearer '+token}}).then(async (response) => {
           this.form.first_name = response.data.first_name
           this.form.last_name = response.data.last_name
           this.form.phone_number = response.data.phone_number
           this.form.email = response.data.email
 
-          swal("User changed successfully", "", "success")
+          await swal("User changed successfully", "", "success")
+          location.href = '/'
+
         }).catch((error)=>{
           console.log("ERROR")
           console.log(error)})
@@ -137,17 +147,28 @@
       getUser (){
 
       let user = JSON.parse(localStorage.getItem('user'))
-      let  username = user['username']
+      let token = ''
+      let  username = ''
+      if(user){
+        token = user['token']
+        username = user['username']
+      }
+
       const path = `http://0.0.0.0:8000/users/${username}/`
-        axios.get(path).then((response) =>{
+        axios.get(path, {headers: {'Authorization': 'Bearer '+token}}).then((response) =>{
           this.form.first_name = response.data.first_name
           this.form.last_name = response.data.last_name
           this.form.phone_number = response.data.phone_number
           this.form.email = response.data.email
           this.form.username = response.data.username
-        }).catch((error)=>{
-          console.log("ERROR")
+        }).catch(async (error) => {
           console.log(error)
+          await swal({
+            icon: 'error',
+            title: 'Error',
+            text: "Something was wrong",
+          })
+          location.href = '/login'
         })
       },
     },
