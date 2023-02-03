@@ -109,7 +109,7 @@
       console.log(path)
       const path = `http://0.0.0.0:8000/users/signup/`
         console.log(path)
-        axios.post(path, this.form).then((response) =>{
+        axios.post(path, this.form).then(async (response) => {
           this.form.username = response.data.username
           this.form.password = response.data.password
           this.form.password_confirmation = response.data.password_confirmation
@@ -117,7 +117,8 @@
           this.form.last_name = response.data.last_name
           this.form.phone_number = response.data.phone_number
           this.form.email = response.data.email
-          location.href = '/'
+          await swal("User registered successfully", "", "success")
+          location.href = '/login'
 
         }).catch((error)=>{
           console.log(error)
