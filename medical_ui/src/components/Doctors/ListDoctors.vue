@@ -49,20 +49,30 @@
 
 <script>
   import axios from 'axios'
+  import swal from "sweetalert";
   export default {
     name: 'ListDoctors',
 
     methods: {
       getDoctors(){
-        console.log("AXIOS")
+        let user = JSON.parse(localStorage.getItem('user'))
+        let token = ''
+        if(user){
+          token = user['token']
+        }
         let url = 'http://0.0.0.0:8000/doctors/'
-        axios.get(url).then((response) => {
+        axios.get(url, {headers: {'Authorization': 'Bearer '+token}}).then((response) => {
           console.log("backend connection")
           console.log(response.data)
           this.items = response.data
-        }).catch((error)=>{
-          console.log("ERROR")
+        }).catch(async (error) => {
           console.log(error)
+          await swal({
+            icon: 'error',
+            title: 'Error',
+            text: "Something was wrong",
+          })
+          location.href = '/login'
         })
       }},
 
@@ -74,8 +84,6 @@
         perPage: 10,
         currentPage: 1,
         fields: ['first_name', 'last_name', 'major', 'center', 'availability'],
-          // { key: 'first_name', label: 'Name' },
-
         items: [
       ]
       }
